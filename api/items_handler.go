@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"grontis/store/models"
 	"grontis/store/storage"
 	"net/http"
 
@@ -64,11 +65,12 @@ func (i ItemsHandler) getItem(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error encoding json response", http.StatusInternalServerError)
 		return
 	}
+
 	writeJsonResponse(w, jsonData)
 }
 
 func (i *ItemsHandler) createItem(w http.ResponseWriter, r *http.Request) {
-	var item storage.Item
+	var item models.Item
 	err := json.NewDecoder(r.Body).Decode(&item)
 	if err != nil {
 		http.Error(w, "Invalid json body", http.StatusBadRequest)
@@ -85,9 +87,8 @@ func (i *ItemsHandler) createItem(w http.ResponseWriter, r *http.Request) {
 }
 
 func (i *ItemsHandler) updateItem(w http.ResponseWriter, r *http.Request) {
-	var item storage.Item
+	var item models.Item
 	err := json.NewDecoder(r.Body).Decode(&item)
-
 	if err != nil {
 		http.Error(w, "Invalid json body", http.StatusBadRequest)
 		return

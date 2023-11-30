@@ -20,6 +20,7 @@ func NewServer(db storage.Storage, router *mux.Router) *Server {
 	}
 
 	AddItemRoutes(&s.router, s.db)
+	AddAuthRoutes(&s.router, s.db)
 	return s
 }
 
