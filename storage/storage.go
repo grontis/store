@@ -15,6 +15,7 @@ type Storage interface {
 
 	GetUsers() ([]models.User, error)
 	GetUser(id uuid.UUID) (models.User, error)
+	GetUserByUsername(username string) (models.User, error)
 	CreateUser(user models.User) (models.User, error)
 	UpdateUser(user models.User) (models.User, error)
 	DeleteUser(id uuid.UUID) error

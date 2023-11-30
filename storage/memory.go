@@ -77,6 +77,15 @@ func (m Memory) GetUser(id uuid.UUID) (models.User, error) {
 	}
 }
 
+func (m Memory) GetUserByUsername(username string) (models.User, error) {
+	for _, user := range m.users {
+		if user.Username == username {
+			return user, nil
+		}
+	}
+	return models.User{}, errors.New("User not found")
+}
+
 func (m *Memory) CreateUser(user models.User) (models.User, error) {
 	if user.Id == uuid.Nil {
 		user.Id = uuid.New()
